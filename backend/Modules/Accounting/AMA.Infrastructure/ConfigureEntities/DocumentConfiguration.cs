@@ -11,15 +11,23 @@ public class AccountingConfiguration : IEntityTypeConfiguration<Document>
     {
         builder.ToTable("Document", AccountingEntityConfiguration.Schema);
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.DocumentNo).IsRequired();
+        builder.Property(x => x.DocumentNo)
+            .IsRequired();
+        builder.Property(x => x.Sum)
+            .IsRequired();
         builder.HasOne(x => x.Type)
             .WithMany()
             .HasForeignKey(x => x.TypeId)
             .OnDelete(DeleteBehavior.Restrict);
-        builder.Property(x => x.Sum).IsRequired();
         builder.HasMany(x => x.DocumentDetails)
             .WithOne(x => x.Document)
-            .HasForeignKey(x => x.DocumentId);
+            .HasForeignKey(x => x.DocumentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        /* 
+         * OnDelete: This means that if you try to delete a Document that has associated DocumentDetail records,
+         the database will prevent the deletion.
+         */
     }
 }
 

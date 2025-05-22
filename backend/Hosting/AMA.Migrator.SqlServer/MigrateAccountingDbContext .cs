@@ -4,23 +4,18 @@ using Microsoft.Extensions.Options;
 
 namespace AMA.Migrator.SqlServer;
 
-public class MigrateAccountingDbContext : DbContext
+public class MigrateAccountingDbContext : SegregateDbContext<MigrateAccountingDbContext>
 {
-    public MigrateAccountingDbContext(DbContextOptions<MigrateAccountingDbContext> options) : base(options)
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder
-           .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AMAccounting;",
-           providerOptions => { providerOptions.EnableRetryOnFailure(); });
+        base.ConfigureConventions(configurationBuilder);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        // temporarily not use until figure it out what is it purpose
+        // khong co nay la khong quet dc cai ientityConfiguration?
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AccountingInfrastructureModule).Assembly);
     }
 }

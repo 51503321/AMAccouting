@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\DocumentDetail\Queries\" />
+    <Folder Include="UseCases\MasterData\Commands\" />
+    <Folder Include="UseCases\MasterData\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.3.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AMAccounting.Shared.Abstractions.Commands\AMA.Shared.Abstractions.Commands.csproj" />
+  </ItemGroup>
+
+</Project>

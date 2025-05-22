@@ -1,8 +1,9 @@
-﻿namespace AMA.Domain.Entities;
+﻿using BuildingBlocks.Domain.Entities;
 
-public class Document
+namespace AMA.Domain.Entities;
+
+public class Document : AuditedEntity<Guid>
 {
-    public Guid Id { get; set; }
     public string DocumentNo { get; set; }
     public DateTime CreatedDate { get; set; }
     public Guid TypeId { get; set; }

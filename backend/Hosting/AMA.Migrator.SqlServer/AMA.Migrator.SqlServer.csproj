@@ -24,10 +24,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Modules\Accounting\AMA.Infrastructure\AMA.Infrastructure.csproj" />
+	  <Folder Include="Migrations\MigrateAccountingDb\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Migrations\MigrateAccountingDb\" />
+	  <ProjectReference Include="..\..\Modules\Accounting\AMA.Infrastructure\AMA.Infrastructure.csproj" />
 	</ItemGroup>
 </Project>

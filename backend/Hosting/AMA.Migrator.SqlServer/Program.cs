@@ -1,6 +1,9 @@
 using AMA.Migrator.SqlServer;
+using Autofac.Core;
+using BuildingBlocks.Infrastructure.DbContexts;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,6 +20,7 @@ internal class Program
 
             #region DbContext
 
+            // tai sao co nay
             builder.Services.AddDbContext<MigrateAccountingDbContext>(opt =>
             {
                 opt.UseSqlServer(
@@ -24,6 +28,17 @@ internal class Program
                     b => b.MigrationsAssembly(typeof(Program).Assembly.FullName)
                         .MigrationsHistoryTable("__AccountingMigrationsHistory", "AM")
                 );
+            });
+
+            // ma lai vua co cai nay
+            builder.Services.Configure<CoreKitDbContextOptions>(options =>
+            {
+                options.Configure(builder =>
+                {
+                    builder
+                        .UseSqlServer(rootConfiguration.GetConnectionString("Default") ?? string.Empty)
+                        .LogTo(Console.WriteLine, LogLevel.Error);
+                });
             });
 
             #endregion

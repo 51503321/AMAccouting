@@ -1,8 +1,9 @@
-﻿namespace AMA.Domain.Entities;
+﻿using BuildingBlocks.Domain.Entities;
 
-public class MasterData
+namespace AMA.Domain.Entities;
+
+public class MasterData : AuditedEntity<Guid>
 {
-    public Guid Id { get; set; }
     public string Code { get; set; }
     public string Name { get; set; }
     public bool? Used { get; set; }
